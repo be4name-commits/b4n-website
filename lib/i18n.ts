@@ -216,3 +216,66 @@ export const translations = {
 export function getTranslation(locale: Locale, key: keyof typeof translations.de) {
   return translations[locale][key] || translations[defaultLocale][key];
 }
+
+export async function getDictionary(locale: string) {
+  const validLocale = locales.includes(locale as Locale) ? (locale as Locale) : defaultLocale;
+  return {
+    ...translations[validLocale],
+    nav: {
+      home: translations[validLocale].home,
+      products: translations[validLocale].products,
+      about: translations[validLocale].about,
+      b2b: translations[validLocale].b2b,
+      contact: translations[validLocale].contact,
+      cart: translations[validLocale].cart,
+    },
+    hero: {
+      title: translations[validLocale].heroTitle,
+      subtitle: translations[validLocale].heroSubtitle,
+      shopNow: translations[validLocale].shopNow,
+      learnMore: translations[validLocale].learnMore,
+    },
+    categories: {
+      wallets: translations[validLocale].wallets,
+      cosmetic_bags: translations[validLocale].cosmetic_bags,
+      toiletry_bags: translations[validLocale].toiletry_bags,
+      belts: translations[validLocale].belts,
+      footwear: translations[validLocale].footwear,
+    },
+    product: {
+      addToCart: translations[validLocale].addToCart,
+      viewDetails: translations[validLocale].viewDetails,
+      price: translations[validLocale].price,
+      material: translations[validLocale].material,
+      dimensions: translations[validLocale].dimensions,
+    },
+    usp: {
+      freeShipping: translations[validLocale].freeShipping,
+      swissQuality: translations[validLocale].swissQuality,
+      genuineLeather: translations[validLocale].genuineLeather,
+      securePayment: translations[validLocale].securePayment,
+    },
+    footer: {
+      about: translations[validLocale].footerAbout,
+      shipping: translations[validLocale].footerShipping,
+      returns: translations[validLocale].footerReturns,
+      privacy: translations[validLocale].footerPrivacy,
+      terms: translations[validLocale].footerTerms,
+      contact: translations[validLocale].footerContact,
+      tagline: 'Premium Leather Accessories',
+      quickLinks: 'Quick Links',
+      shippingFree: translations[validLocale].freeShipping,
+      shippingCH: 'Switzerland: 9 CHF',
+      shippingEU: 'Europe: 20 CHF',
+      rights: 'All rights reserved.',
+    },
+    contact: {
+      email: translations[validLocale].email,
+      phone: translations[validLocale].phone,
+    },
+    common: {
+      viewAll: translations[validLocale].viewAll,
+      items: translations[validLocale].items,
+    },
+  };
+}
