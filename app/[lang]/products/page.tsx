@@ -33,15 +33,28 @@ export default function ProductsPage({ params, searchParams }: ProductsPageProps
               key={product.sku}
               className="border border-gray-200 card-hover group"
             >
-              {/* Product Image Placeholder */}
-              <div className="aspect-square bg-gray-100 flex items-center justify-center">
-                <span className="text-6xl">
-                  {product.category === 'Wallets' && '👛'}
-                  {product.category === 'Cosmetic Bags' && '💄'}
-                  {product.category === 'Toiletry Bags' && '🧳'}
-                  {product.category === 'Belts' && '🎗️'}
-                  {product.category === 'Footwear' && '👞'}
-                </span>
+              {/* Product Image */}
+              <div className="aspect-square bg-gray-100 overflow-hidden">
+                <img
+                  src={`/images/${product.sku}.png`}
+                  alt={getProductName(product, lang)}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    // Fallback to emoji if image not found
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `<span class="text-6xl flex items-center justify-center h-full">${
+                        product.category === 'Wallets' ? '👛' :
+                        product.category === 'Cosmetic Bags' ? '💄' :
+                        product.category === 'Toiletry Bags' ? '🧳' :
+                        product.category === 'Belts' ? '🎗️' :
+                        product.category === 'Footwear' ? '👞' : '📦'
+                      }</span>`;
+                    }
+                  }}
+                />
               </div>
 
               <div className="p-4">
